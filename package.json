@@ -8,11 +8,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
+    "basic-auth": "^1.0.3",
     "express": "^4.13.3",
     "fbgraph": "^1.1.0",
     "github": "^0.2.4",
     "instagram-node": "^0.5.8",
     "mongodb": "^2.1.16",
+    "oauth": "^0.9.14",
     "socket.io": "*",
     "tumblr.js": "0.0.7",
     "twitter": "^1.2.5"

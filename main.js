@@ -4,10 +4,27 @@ var httpServer = require('http').Server(app);
 var io = require('socket.io')(httpServer);
 var Server = require('./lib/server');
 
+var vendors = require('./vendors');
+var routes = require('./lib/http/routes');
+var auth = require('./lib/http/auth');
+
 httpServer.listen(3000);
 
 app.use(express.static('static'));
 
+app.get('/auth/tumblr/request', auth, routes.tumblrRequest);
+app.get('/auth/tumblr/callback', auth, routes.tumblrCallback);
+
+//app.post('/user', routes.addUser);
+//app.get('/user', auth, routes.getUserInfo);
+
+//app.get('/user/:id', routes.getUserStream);
+
+app.get('/posts/tumblr', auth, routes.postsTumblr);
+app.get('/posts/instagram', auth, routes.postsInstagram);
+app.get('/posts/facebook', auth, routes.postsFacebook);
+app.get('/posts/twitter', auth, routes.postsTwitter);
+app.get('/posts/github', auth, routes.postsGithub);
 
 var s = new Server(io);
 s.init();
