@@ -9,7 +9,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
-    "socket.io": "*"
+    "fbgraph": "^1.1.0",
+    "github": "^0.2.4",
+    "instagram-node": "^0.5.8",
+    "mongodb": "^2.1.16",
+    "socket.io": "*",
+    "tumblr.js": "0.0.7",
+    "twitter": "^1.2.5"
   },
   "description": ""
 }
