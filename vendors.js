@@ -5,7 +5,7 @@ var oauth = require('oauth'),
   util = require('util');
 
 
-MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB, 27017), function(err, db) {
+MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB || '127.0.0.1', 27017), function(err, db) {
   if (err) throw err;
   console.log('Connected to mongodb.');
   exports.mongo = db;
@@ -17,7 +17,7 @@ exports.tumblr = new oauth.OAuth(
   process.env.TUMBLR_KEY,
   process.env.TUMBLR_SECRET,
   "1.0A",
-  "http://localhost:3000/auth/callback",
+  "http://localhost:3000/auth/tumblr/callback",
   "HMAC-SHA1"
 );
 
