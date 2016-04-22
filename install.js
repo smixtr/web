@@ -11,6 +11,7 @@ var password = 'admin';
 
 var insertUser = function(db, callback) {
   db.collection('users').insertOne({
+    '_id': 'admin',
     'auth': {
       'username': 'admin',
       'password': crypto.createHash('md5').update(password).digest("hex")
