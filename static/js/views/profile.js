@@ -25,11 +25,12 @@ window.ProfileView = Backbone.View.extend({
       modem('GET', '/profile',
           function(json) {
               //console.log('futura info' +json.toDo);
-              $('#txtID').text(json.userData._id);
-              $('#txtUsername').text(json.userData.auth.username);
-              $('#txtPassword').text(json.userData.auth.password);
-              $('#txtStatus').text(json.userData.status);
-              $('#txtType').text(json.userData.type);
+              $('#txtID').text(json._id);
+              $('#txtUsername').text(json.auth.username);
+              $('#txtPassword').text(json.auth.password);
+              $('#txtStatus').text(json.status);
+              $('#txtType').text(json.type);
+              console.log(json);
           },
           function(xhr, ajaxOptions, thrownError) {
               var json = JSON.parse(xhr.responseText);
