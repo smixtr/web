@@ -5,21 +5,12 @@ var oauth = require('oauth'),
   util = require('util');
 
 
-MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB, 27017), function(err, db) {
+MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB || '127.0.0.1', 27017), function(err, db) {
   if (err) throw err;
   console.log('Connected to mongodb.');
   exports.mongo = db;
 });
 
-exports.tumblr = new oauth.OAuth(
-  "http://www.tumblr.com/oauth/request_token",
-  "http://www.tumblr.com/oauth/access_token",
-  process.env.TUMBLR_KEY,
-  process.env.TUMBLR_SECRET,
-  "1.0A",
-  "http://localhost:3000/auth/callback",
-  "HMAC-SHA1"
-);
 
 /*
 exports.twitter = {

@@ -6,10 +6,12 @@ var MongoClient = require('mongodb').MongoClient,
 
 console.log('Running install script.');
 
-var password = Math.random().toString(36).substr(2, 12);
+//Math.random().toString(36).substr(2, 12);
+var password = 'admin';
 
 var insertUser = function(db, callback) {
   db.collection('users').insertOne({
+    '_id': 'admin',
     'auth': {
       'username': 'admin',
       'password': crypto.createHash('md5').update(password).digest("hex")
@@ -22,7 +24,7 @@ var insertUser = function(db, callback) {
   });
 };
 
-MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB, 27017), function(err, db) {
+MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB || '127.0.0.1', 27017), function(err, db) {
   insertUser(db, function() {
     db.close();
     console.log('Installation finished.');

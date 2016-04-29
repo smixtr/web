@@ -12,8 +12,10 @@ httpServer.listen(3000);
 
 app.use(express.static('static'));
 
+app.get('/user', auth, routes.user);
+
 app.get('/auth/tumblr/request', auth, routes.tumblrRequest);
-app.get('/auth/tumblr/callback', auth, routes.tumblrCallback);
+app.get('/auth/tumblr/callback', routes.tumblrCallback);
 
 //app.post('/user', routes.addUser);
 //app.get('/user', auth, routes.getUserInfo);
