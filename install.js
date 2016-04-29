@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient,
   ObjectId = require('mongodb').ObjectID,
   fs = require('fs'),
-  crypto = require('crypto'),
+  crypto = require('crypto'), 
   util = require('util');
 
 console.log('Running install script.');
@@ -24,7 +24,8 @@ var insertUser = function(db, callback) {
   });
 };
 
-MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB || '127.0.0.1', 27017), function(err, db) {
+MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB , 27017), function(err, db) {
+  console.log(process.env.MONGODB);
   insertUser(db, function() {
     db.close();
     console.log('Installation finished.');
