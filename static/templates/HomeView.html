@@ -5,25 +5,50 @@
       <!-- <div style="background-image:" -->
       <h1 class="text-center">  <!--<i class="fa fa-mobile-phone">--></i> SMIXTR </h1>
     </div>
+
     <div class="templatemo_home_inner_wapper">
       <h2 class="text-center">Join us</h2>
       <p class="text-center">
         Where all comes together
       </p>
     </div>
-    <div class="templatemo_home_inner_wapper btn_wapper">
+<section id="templatemo_contact" style="background:transparent">
+    <form  role="form" id="registerForm" style="display:none;" method="POST" action="/user/add">
+
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-user"></i></div>
+          <input id="regTxtEmail" type="text" name="email" class="form-control" id="contact-name" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+          <input id="regTxtPassword" type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-6 col-xs-offset-6">
+          <button type="button" class="form-control" id="btnRegister">Register</button>
+        </div>
+      </div>
+    </form>
+</section>
+    <div class="templatemo_home_inner_wapper btn_wapper"  id="initialForm">
       <div class="col-sm-6">
         <a id="btnTumblr" class="btn col-xs-12 scroll_effect shadow-top-down">
           <i class="fa fa-align-justify"></i> Login
         </a>
       </div>
       <div class="col-sm-6">
-        <a href="#templatemo_download" class="btn col-xs-12 scroll_effect shadow-top-down">
-          <i class="fa fa-download"></i> Social Networks
+        <a id="btnShowRegister" class="btn col-xs-12 scroll_effect shadow-top-down">
+          <i class="fa fa-download"></i> Register
         </a>
       </div>
-    </div>
+
   </div>
+</div>
+
 </section>
 <!-- Download -->
 <section id="templatemo_download">
