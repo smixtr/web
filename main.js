@@ -1,16 +1,18 @@
-var express = require('express');
-var app = express();
-var httpServer = require('http').Server(app);
-var io = require('socket.io')(httpServer);
-var Server = require('./lib/server');
-
-var vendors = require('./vendors');
-var routes = require('./lib/http/routes');
-var auth = require('./lib/http/auth');
+var express = require('express'),
+  app = express(),
+  httpServer = require('http').Server(app),
+  io = require('socket.io')(httpServer),
+  Server = require('./lib/server'),
+  fs = require('fs'),
+  vendors = require('./vendors'),
+  routes = require('./lib/http/routes'),
+  auth = require('./lib/http/auth');
 
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 httpServer.listen(3000);
@@ -27,11 +29,24 @@ app.post('/user/add', routes.addUser);
 app.get('/profile', auth, routes.getUserInfo);
 //app.get('/user/:id', routes.getUserStream);
 
-app.get('/posts/tumblr', auth, routes.postsTumblr);
-app.get('/posts/instagram', auth, routes.postsInstagram);
-app.get('/posts/facebook', auth, routes.postsFacebook);
-app.get('/posts/twitter', auth, routes.postsTwitter);
-app.get('/posts/github', auth, routes.postsGithub);
+app.get('/posts/:user', routes.posts);
 
-var s = new Server(io);
-s.init();
+
+setTimeout(function() {
+  var s = new Server(io);
+  s.init();
+
+
+  var files = fs.readdirSync('./workers/');
+  for (var i = files.length - 1; i >= 0; i--) {
+    if (files[i].indexOf('.js') >= 0) {
+      var name = files[i].replace('.js', '');
+      var Worker = require('./workers/' + name);
+      var worker = new Worker();
+      if (worker.start) {
+        console.log('Starting scheduler ' + name);
+        worker.start();
+      }
+    }
+  }
+}, 5000);
