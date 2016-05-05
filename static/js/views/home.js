@@ -2,6 +2,7 @@ window.HomeView = Backbone.View.extend({
     events: {
         'click #btnLogin': 'login',
         'click #btnTumblr': 'tumblr',
+		 'click #btnTwitter': 'twitter',
         //mostrar form para registar
         'click #btnShowRegister': 'showRegisterForm',
         //enviar registo para DB
@@ -65,6 +66,18 @@ window.HomeView = Backbone.View.extend({
             function(json) {
                 console.log(json);
                 window.location = "http://www.tumblr.com/oauth/authorize?oauth_token=" + json.token;
+            },
+            function(xhr, ajaxOptions, thrownError) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json);
+            }
+        );
+    },
+	twitter: function() {
+        modem('GET', '/auth/twitter/request',
+            function(json) {
+                console.log(json);
+                window.location = "https://api.twitter.com/oauth/authenticate?oauth_token=" + json.token;
             },
             function(xhr, ajaxOptions, thrownError) {
                 var json = JSON.parse(xhr.responseText);

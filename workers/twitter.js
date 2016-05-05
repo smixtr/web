@@ -1,5 +1,5 @@
 var vendors = require('../vendors'),
-  tumblr = require('tumblr.js');
+  twitter = require('twitter');
 
 var Worker = function() {};
 
@@ -7,18 +7,18 @@ Worker.prototype.start = function() {
   var self = this;
   setInterval(function() {
     var cursor = vendors.mongo.collection('users').find({
-      'tumblrOauthAccessToken': {
+      'twitterOauthAccessToken': {
         $exists: true
       }
     });
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        this.client = tumblr.createClient({
-          consumer_key: process.env.TUMBLR_KEY,
-          consumer_secret: process.env.TUMBLR_SECRET,
-          token: doc.tumblrOauthAccessToken,
-          token_secret: doc.tumblrOauthAccessTokenSecret
+        this.client = twitter.createClient({
+          consumer_key: process.env.TWITTER_KEY,
+          consumer_secret: process.env.TWITTER_SECRET,
+          token: doc.twitterOauthAccessToken,
+          token_secret: doc.twitterOauthAccessTokenSecret
         });
 
         this.client.userInfo(function(err, data) {
@@ -40,7 +40,7 @@ Worker.prototype.start = function() {
 Worker.prototype.verifyPost = function(userid, post) {
   vendors.mongo.collection('users').findOne({
     _id: userid,
-    'tumblrPosts': {
+    'twitterPosts': {
       $not: {
         $elemMatch: {
           id: post.id
@@ -50,10 +50,10 @@ Worker.prototype.verifyPost = function(userid, post) {
   }, function(err, user) {
     if (user) {
       console.log('Adding post: ' + post.id);
-      if (!user.tumblrPosts) {
-        user.tumblrPosts = [];
+      if (!user.twitterPosts) {
+        user.twitterPosts = [];
       }
-      user.tumblrPosts.push(post);
+      user.twitterPosts.push(post);
 
       vendors.mongo.collection('users').save(user, function(err, output) {
         if (err) {
