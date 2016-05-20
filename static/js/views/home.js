@@ -82,10 +82,11 @@ window.HomeView = Backbone.View.extend({
     },
     
     tumblr: function() {
-        modem('GET', '/auth/tumblr/request',
+        modem('GET', '/auth/facebook/request',
             function(json) {
                 console.log(json);
-                window.location = "http://www.tumblr.com/oauth/authorize?oauth_token=" + json.token;
+                //window.location = "http://www.tumblr.com/oauth/authorize?oauth_token=" + json.token;
+                window.location = json.url;
             },
             function(xhr, ajaxOptions, thrownError) {
                 var json = JSON.parse(xhr.responseText);

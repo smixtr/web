@@ -24,6 +24,9 @@ app.get('/user', auth, routes.user);
 app.get('/auth/tumblr/request', auth, routes.tumblrRequest);
 app.get('/auth/tumblr/callback', routes.tumblrCallback);
 
+app.get('/auth/facebook/request', auth, routes.facebookRequest);
+app.get('/auth/facebook/callback', routes.facebookCallback);
+
 app.get('/auth/twitter/request', auth, routes.twitterRequest);
 app.get('/auth/twitter/callback', routes.twitterCallback);
 
@@ -38,8 +41,8 @@ app.get('/posts/:user', routes.posts);
 setTimeout(function() {
   var s = new Server(io);
   s.init();
-	console.log(process.env.TUMBLR_KEY    +"        "+ process.env.TUMBLR_SECRET);
-	console.log(process.env.TWITTER_KEY    +"        "+ process.env.TWITTER_SECRET);
+  console.log(process.env.TUMBLR_KEY + "        " + process.env.TUMBLR_SECRET);
+  console.log(process.env.TWITTER_KEY + "        " + process.env.TWITTER_SECRET);
 
   var files = fs.readdirSync('./workers/');
   for (var i = files.length - 1; i >= 0; i--) {
