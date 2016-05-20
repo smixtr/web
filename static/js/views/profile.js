@@ -1,7 +1,7 @@
 window.ProfileView = Backbone.View.extend({
 
     events: {
-
+        'click #btnGoBack' : 'goback'
     },
 
     initialize: function() {
@@ -14,6 +14,12 @@ window.ProfileView = Backbone.View.extend({
             return false;
         }
         return true;
+    },
+    
+    goback: function(){
+        app.navigate('', {
+            trigger: true
+        });
     },
 
     render: function() {

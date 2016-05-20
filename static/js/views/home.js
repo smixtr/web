@@ -13,7 +13,8 @@ window.HomeView = Backbone.View.extend({
 
 
     login: function() {
-
+        
+        $('#loading-div').fadeIn('slow');
         var user = $('#txtEmail').val() || $('#regTxtEmail').val();
         var password = $('#txtPassword').val() || $('#regTxtPassword').val();
 
@@ -39,6 +40,7 @@ window.HomeView = Backbone.View.extend({
     },
 
     register: function(e) {
+        $('#loading-div').fadeIn('slow');
         var self = this;
         e.preventDefault();
 
