@@ -5,6 +5,8 @@ window.HomeView = Backbone.View.extend({
 		 'click #btnTwitter': 'twitter',
         //mostrar form para registar
         'click #btnShowRegister': 'showRegisterForm',
+        'click #btnShowLogin': 'showLoginForm',
+        'click #btnGoBack': 'showInitialForm',
         //enviar registo para DB
         'click #btnRegister': 'register'
     },
@@ -56,11 +58,29 @@ window.HomeView = Backbone.View.extend({
     },
 
     showRegisterForm: function() {
-        $("#registerForm").attr("style", "display:show;");
+        $("#initialForm").attr("style", "display:none; Height:0px !important");
+        $("#registerForm").fadeIn("slow");
+    },
+    
+    showLoginForm: function(){
+        $("#loginForm").fadeIn("slow");
         $("#initialForm").attr("style", "display:none; Height:0px !important");
     },
-
-
+    
+    showInitialForm: function(e){
+        var type = $(e.currentTarget).data('type');
+        switch(type){
+          case 'login':
+            $("#loginForm").attr("style", "display:none; Height:0px !important");
+          break; 
+          case 'register':
+            $("#registerForm").attr("style", "display:none; Height:0px !important");
+          break; 
+        };
+        
+        $("#initialForm").fadeIn("slow");
+    },
+    
     tumblr: function() {
         modem('GET', '/auth/tumblr/request',
             function(json) {
