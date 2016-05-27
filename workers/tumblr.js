@@ -1,5 +1,6 @@
 var vendors = require('../vendors'),
-  tumblr = require('tumblr.js');
+  tumblr = require('tumblr.js'),
+  async = require('async');
 
 var Worker = function() {};
 
@@ -26,9 +27,7 @@ Worker.prototype.start = function() {
             console.log(blog.name);
             client.posts(blog.name, function(err, resp) {
               console.log(resp.posts);
-              for (var i = 0; i < resp.posts.length; i++) {
-                self.verifyPost(doc._id, resp.posts[i]);
-              }
+              self.verifyPost(doc._id, resp.posts);
             });
           });
         });
@@ -37,31 +36,36 @@ Worker.prototype.start = function() {
   }, 60000);
 };
 
-Worker.prototype.verifyPost = function(userid, post) {
-  vendors.mongo.collection('users').findOne({
-    _id: userid,
-    'tumblrPosts': {
-      $not: {
-        $elemMatch: {
-          id: post.id
+Worker.prototype.verifyPost = function(userid, posts) {
+  async.mapSeries(posts, function(post, callback) {
+    vendors.mongo.collection('users').findOne({
+      _id: userid,
+      'tumblrPosts': {
+        $not: {
+          $elemMatch: {
+            id: post.id
+          }
         }
       }
-    }
-  }, function(err, user) {
-    if (user) {
-      console.log('Adding post: ' + post.id);
-      if (!user.tumblrPosts) {
-        user.tumblrPosts = [];
-      }
-      user.tumblrPosts.push(post);
+    }, function(err, user) {
+      if (user) {
+        console.log('Adding post: ' + post.id);
+        if (!user.tumblrPosts) {
+          user.tumblrPosts = [];
+        }
+        user.tumblrPosts.push(post);
 
-      vendors.mongo.collection('users').save(user, function(err, output) {
-        if (err) {
-          console.log('Failed to update user.');
-          console.log(err);
-        }
-      });
-    }
+        vendors.mongo.collection('users').save(user, function(err, output) {
+          if (err) {
+            console.log('Failed to update user.');
+            console.log(err);
+          }
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
   });
 };
 
