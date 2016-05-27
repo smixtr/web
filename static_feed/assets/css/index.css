@@ -1,0 +1,105 @@
+ body {
+    margin: 0px;
+    font-family: Helvetica;
+    background-image: url("../images/background_S.png");
+    overflow: hidden;
+    -webkit-text-size-adjust: left;
+    background-repeat: no-repeat;
+    background-position: right top;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+body > h1 {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 5px;
+    line-height: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0;
+    text-overflow: ellipsis;
+    color: #FFFFFF;
+    background: url() #80aaff no-repeat;
+    border-bottom: 1px solid #2d3642;
+}
+
+
+.button {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    -webkit-border-image: url("../images/background_S.png") 0 5 0 5;
+    -webkit-border-radius: 15;
+    border-width: 0 5px 0 5px;
+    padding: 0;
+    height: 15px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+    text-decoration: none;
+    background: none;
+}
+
+#homeButton {
+    display: none;
+    left: 15px;
+    right: auto;
+    background: url() 0 8 0 14;
+    border-width: 0 8px 0 14px;
+}
+
+.goButton {
+    -webkit-border-image: url(pasteplease) 0 5 0 5;
+    border-width: 0 10px;
+}
+
+body > div,
+body > form,
+body > ul {
+    display: none;
+    position: absolute;
+    left: 00px;
+    top: 150px;
+    width: 100%;
+    min-height: 480px;
+    text-align: center;
+    margin: 5;
+    padding: 5;
+}
+
+body > *[selected="true"] {
+    display: block;
+}
+
+body > ul > li {
+    margin: 0;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 0;
+    background: url() left;
+    font-size: 25px;
+    font-weight: bold;
+    list-style: none;
+}
+
+body > ul > li > a {
+    display: block;
+    padding: 8px 32px 8px 8px;
+    text-decoration: none;
+    background: url() margin-left;
+    color: inherit;
+}
+.panel {
+    box-sizing: border-box;
+    padding: 10px;
+    background: #c8c8c8 url();
+}
+
+.subtxt {
+    font-size: small;
+    font-weight: normal;
+}
