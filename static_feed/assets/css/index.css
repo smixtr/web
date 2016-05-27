@@ -11,9 +11,14 @@
     margin-left: 3px;
 }
 
+images{
+    float: right;
+    margin: 0 0 1em 1em;
+}
+
 body > h1 {
     box-sizing: border-box;
-    margin: 0px;
+    margin: 0 auto;
     padding: 5px;
     line-height: 15px;
     font-size: 20px;
@@ -22,7 +27,7 @@ body > h1 {
     text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0;
     text-overflow: ellipsis;
     color: #FFFFFF;
-    background: url() #80aaff no-repeat;
+    background: url() #eeccff no-repeat;
     border-bottom: 1px solid #2d3642;
 }
 
@@ -31,7 +36,7 @@ body > h1 {
     position: absolute;
     top: 0px;
     right: 10px;
-    -webkit-border-image: url("../images/background_S.png") 0 5 0 5;
+    -webkit-border-image: url("../images/logotipo_s.png") 0 5 0 5;
     -webkit-border-radius: 15;
     border-width: 0 5px 0 5px;
     padding: 0;
@@ -77,8 +82,8 @@ body > *[selected="true"] {
 }
 
 body > ul > li {
-    margin: 0;
-    border-bottom: 1px solid #E0E0E0;
+    margin: 1;
+    border-bottom: 10px solid #E0E0E0;
     padding: 0;
     background: url() left;
     font-size: 25px;
@@ -95,7 +100,7 @@ body > ul > li > a {
 }
 .panel {
     box-sizing: border-box;
-    padding: 10px;
+    padding: 20px;
     background: #c8c8c8 url();
 }
 
