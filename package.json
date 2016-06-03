@@ -19,7 +19,7 @@
     "oauth": "^0.9.14",
     "socket.io": "*",
     "tumblr.js": "0.0.7",
-    "twitter": "^1.2.5"
+    "twit": "^2.2.4"
   },
   "description": ""
 }

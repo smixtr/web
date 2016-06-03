@@ -1,5 +1,5 @@
 var vendors = require('../vendors'),
-  twitter = require('twitter');
+  Twit  = require('twit');
 
 var Worker = function() {};
 
@@ -14,29 +14,37 @@ Worker.prototype.start = function() {
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        this.client = twitter.createClient({
+        var client = new Twit({
           consumer_key: process.env.TWITTER_KEY,
           consumer_secret: process.env.TWITTER_SECRET,
-          token: doc.twitterOauthAccessToken,
-          token_secret: doc.twitterOauthAccessTokenSecret
+		  access_token:         doc.twitterOauthAccessToken,
+		  access_token_secret:  doc.twitterOauthAccessTokenSecret,
         });
+	  client.setAuth(client);
+	/*var stream = client.stream('statuses/sample')
+	 
+	stream.on('tweet', function (tweet) {
+	  console.log(tweet)
+	})*/
+	client.get('search/tweets', { q: '@Granady', count: 100 },function(err, data, response) {
+  console.log(data);
+})
+	  /*client.get('followers/ids', function(err, data, response) {
+		if(!err){
+			console.log(response);
+			console.log(data);
+			//res.send(data);
+		}
+	  });*/
+		
 
-        this.client.userInfo(function(err, data) {
-          data.user.blogs.forEach(function(blog) {
-            console.log(blog.name);
-            client.posts(blog.name, function(err, resp) {
-              console.log(resp.posts);
-              for (var i = 0; i < resp.posts.length; i++) {
-                self.verifyPost(doc._id, resp.posts[i]);
-              }
-            });
-          });
-        });
       }
     });
-  }, 5000);
+  }, 6000);
 };
 
+//TWITTER_KEY=EKT9YuYCDMTd6sFoIHVgIM6Gk
+//TWITTER_SECRET=vuSSMQ7C6Vr2J9VJwH44WPsFgSO8xnzohIdNowfm68GJEg0GA4
 Worker.prototype.verifyPost = function(userid, post) {
   vendors.mongo.collection('users').findOne({
     _id: userid,

@@ -34,7 +34,7 @@ Worker.prototype.start = function() {
         });
       }
     });
-  }, 5000);
+  }, 360000);
 };
 
 Worker.prototype.verifyPost = function(userid, post) {

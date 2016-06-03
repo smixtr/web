@@ -76,7 +76,7 @@ window.HomeView = Backbone.View.extend({
 	twitter: function() {
         modem('GET', '/auth/twitter/request',
             function(json) {
-                console.log(json);
+                console.log("in authenticate: " + json);
                 window.location = "https://api.twitter.com/oauth/authenticate?oauth_token=" + json.token;
             },
             function(xhr, ajaxOptions, thrownError) {
