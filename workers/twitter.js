@@ -1,10 +1,10 @@
 var vendors = require('../vendors'),
-  Twit = require('twit');
+  Twit = require('twit'),
+  async = require('async');
 
 var Worker = function() {
   this.client = new Twit({});
 };
-var old = undefined;
 
 Worker.prototype.start = function() {
   var self = this;
@@ -25,14 +25,7 @@ Worker.prototype.start = function() {
         });
         client.setAuth(client);
         client.get('statuses/user_timeline', function(err, data, response) {
-          if (!err)
-            if (old === undefined) {
-              old = data[0].text;
-              console.log(old);
-            } else if (old !== data[0].text) {
-            old = data[0].text;
-            console.log(old);
-          }
+          verifyPost(doc._id, data);
         });
       }
     });
@@ -41,31 +34,36 @@ Worker.prototype.start = function() {
 
 //TWITTER_KEY=EKT9YuYCDMTd6sFoIHVgIM6Gk
 //TWITTER_SECRET=vuSSMQ7C6Vr2J9VJwH44WPsFgSO8xnzohIdNowfm68GJEg0GA4
-Worker.prototype.verifyPost = function(userid, post) {
-  vendors.mongo.collection('users').findOne({
-    _id: userid,
-    'twitterPosts': {
-      $not: {
-        $elemMatch: {
-          id: post.id
+Worker.prototype.verifyPost = function(userid, posts) {
+  async.mapSeries(posts, function(post, callback) {
+    vendors.mongo.collection('users').findOne({
+      _id: userid,
+      'twitterPosts': {
+        $not: {
+          $elemMatch: {
+            id: post.id
+          }
         }
       }
-    }
-  }, function(err, user) {
-    if (user) {
-      console.log('Adding post: ' + post.id);
-      if (!user.twitterPosts) {
-        user.twitterPosts = [];
-      }
-      user.twitterPosts.push(post);
+    }, function(err, user) {
+      if (user) {
+        console.log('Adding post: ' + post.id);
+        if (!user.twitterPosts) {
+          user.twitterPosts = [];
+        }
+        user.twitterPosts.push(post);
 
-      vendors.mongo.collection('users').save(user, function(err, output) {
-        if (err) {
-          console.log('Failed to update user.');
-          console.log(err);
-        }
-      });
-    }
+        vendors.mongo.collection('users').save(user, function(err, output) {
+          if (err) {
+            console.log('Failed to update user.');
+            console.log(err);
+          }
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
   });
 };
 
