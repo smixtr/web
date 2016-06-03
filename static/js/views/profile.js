@@ -6,7 +6,7 @@ window.ProfileView = Backbone.View.extend({
     'click #btnTwitter': 'twitter',
     'click #btnFacebook': 'facebook',
     'click #btnInstagram': '',
-    'click #btnGithub': ''
+    'click #btnGithub': 'github'
   },
 
   initialize: function() {
@@ -44,6 +44,19 @@ window.ProfileView = Backbone.View.extend({
       function(json) {
         console.log(json);
         window.location = "https://api.twitter.com/oauth/authenticate?oauth_token=" + json.token;
+      },
+      function(xhr, ajaxOptions, thrownError) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json);
+      }
+    );
+  },
+  github: function() {
+    modem('GET', '/auth/github/request',
+      function(json) {
+        console.log(json);
+
+        window.location = json.url;
       },
       function(xhr, ajaxOptions, thrownError) {
         var json = JSON.parse(xhr.responseText);

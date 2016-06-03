@@ -30,6 +30,8 @@ app.get('/auth/facebook/callback', routes.facebookCallback);
 app.get('/auth/twitter/request', auth, routes.twitterRequest);
 app.get('/auth/twitter/callback', routes.twitterCallback);
 
+app.get('/auth/github/request', auth, routes.githubRequest);
+app.get('/auth/github/callback', routes.githubCallback);
 
 app.post('/user/add', routes.addUser);
 app.get('/profile', auth, routes.getUserInfo);
@@ -41,8 +43,12 @@ app.get('/posts/:user', routes.posts);
 setTimeout(function() {
   var s = new Server(io);
   s.init();
-  console.log(process.env.TUMBLR_KEY + "        " + process.env.TUMBLR_SECRET);
-  console.log(process.env.TWITTER_KEY + "        " + process.env.TWITTER_SECRET);
+  process.env.GITHUB_KEY="c43caf3afc7f1c6b89bf";
+  process.env.GITHUB_SECRET="dc981d91e0b13dfafd8676cbc5fb95e92a48efd7";
+  console.log("TUMBLR:    " + process.env.TUMBLR_KEY + "     " + process.env.TUMBLR_SECRET);
+  console.log("TWITTER:   " + process.env.TWITTER_KEY + "     " + process.env.TWITTER_SECRET);
+  console.log("GITHUB:    " + process.env.GITHUB_KEY + "     " + process.env.GITHUB_SECRET);
+  console.log("FACEBOOK:  " + process.env.FACEBOOK_ID + "     " + process.env.FACEBOOK_SECRET);
 
   var files = fs.readdirSync('./workers/');
   for (var i = files.length - 1; i >= 0; i--) {
