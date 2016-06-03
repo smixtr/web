@@ -1,7 +1,10 @@
 var vendors = require('../vendors'),
-  Twit  = require('twit');
+  Twit = require('twit');
 
-var Worker = function() {};
+var Worker = function() {
+  this.client = new Twit({});
+};
+var old = undefined;
 
 Worker.prototype.start = function() {
   var self = this;
@@ -14,30 +17,23 @@ Worker.prototype.start = function() {
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        var client = new Twit({
+        self.client({
           consumer_key: process.env.TWITTER_KEY,
           consumer_secret: process.env.TWITTER_SECRET,
-		  access_token:         doc.twitterOauthAccessToken,
-		  access_token_secret:  doc.twitterOauthAccessTokenSecret,
+          access_token: doc.twitterOauthAccessToken,
+          access_token_secret: doc.twitterOauthAccessTokenSecret,
         });
-	  client.setAuth(client);
-	/*var stream = client.stream('statuses/sample')
-	 
-	stream.on('tweet', function (tweet) {
-	  console.log(tweet)
-	})*/
-	client.get('search/tweets', { q: '@Granady', count: 100 },function(err, data, response) {
-  console.log(data);
-})
-	  /*client.get('followers/ids', function(err, data, response) {
-		if(!err){
-			console.log(response);
-			console.log(data);
-			//res.send(data);
-		}
-	  });*/
-		
-
+        client.setAuth(client);
+        client.get('statuses/user_timeline', function(err, data, response) {
+          if (!err)
+            if (old === undefined) {
+              old = data[0].text;
+              console.log(old);
+            } else if (old !== data[0].text) {
+            old = data[0].text;
+            console.log(old);
+          }
+        });
       }
     });
   }, 6000);
