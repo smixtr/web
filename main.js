@@ -8,7 +8,6 @@ var express = require('express'),
   routes = require('./lib/http/routes'),
   auth = require('./lib/http/auth'),
   oauth = require('oauth');
-var Twit = require('twit');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
