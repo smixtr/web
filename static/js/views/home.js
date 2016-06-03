@@ -1,7 +1,6 @@
 window.HomeView = Backbone.View.extend({
     events: {
         'click #btnLogin': 'login',
-
         //mostrar form para registar
         'click #btnShowRegister': 'showRegisterForm',
         'click #btnShowLogin': 'showLoginForm',
@@ -28,7 +27,6 @@ window.HomeView = Backbone.View.extend({
                       trigger: true
                     });
                 }, 1200);
-
                 console.log('modem. get/user: ' + json);
             },
             function(xhr, ajaxOptions, thrownError) {
@@ -82,7 +80,7 @@ window.HomeView = Backbone.View.extend({
         $("#initialForm").fadeIn("slow");
     },
 
-    
+
 
 
     render: function() {
