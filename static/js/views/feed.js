@@ -25,9 +25,9 @@ window.FeedView = Backbone.View.extend({
 
     $(this.el).html(this.template());
 
-    $('#txtUsername', this.el).text(this.model.get('posts').tumblr[0].blog_name);
 
-    console.log(this.model.get('posts'));
+    var data = this.model.get('posts').tumblr;
+    $('#txtUsername', this.el).text(JSON.stringify(data));
     return this;
   }
 

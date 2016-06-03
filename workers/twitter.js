@@ -3,7 +3,7 @@ var vendors = require('../vendors'),
 
 var Worker = function() {};
 
-Worker.prototype.start = function() {
+Worker.prototype.starta = function() {
   var self = this;
   setInterval(function() {
     var cursor = vendors.mongo.collection('users').find({
