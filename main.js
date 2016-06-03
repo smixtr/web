@@ -35,28 +35,6 @@ app.get('/auth/twitter/request', auth, routes.twitterRequest);
 app.get('/auth/twitter/callback', routes.twitterCallback);
 
 
-
-app.get('/dario', function(req, res) {
-
-  var twita = new Twit({
-    consumer_key: 'EKT9YuYCDMTd6sFoIHVgIM6Gk',
-    consumer_secret: 'vuSSMQ7C6Vr2J9VJwH44WPsFgSO8xnzohIdNowfm68GJEg0GA4',
-    access_token: '2558444670-XabqX006JNOe6ajqJaKoP4FvMsItIfWIfFSq06s',
-    access_token_secret: 'Tg7RczoBYXzGfpYQCr7P0Q0TroT86iEdFfNhIzUnKZqdu'
-  });
-
-
-  twita.setAuth(twita);
-
-  twita.get('followers/ids', function(err, data, response) {
-    console.log(response);
-    console.log(data);
-    res.send(data);
-  })
-
-
-});
-
 //User data from all social network
 app.get('/posts/:user', routes.posts);
 //User data from each social network
