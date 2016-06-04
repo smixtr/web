@@ -3,7 +3,7 @@ var vendors = require('../vendors'),
   async = require('async');
 
 var Worker = function() {
-  this.client = new Twit({});
+
 };
 
 Worker.prototype.start = function() {
@@ -17,15 +17,13 @@ Worker.prototype.start = function() {
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        self.client({
-          consumer_key: process.env.TWITTER_KEY,
+		this.client = new Twit({consumer_key: process.env.TWITTER_KEY,
           consumer_secret: process.env.TWITTER_SECRET,
           access_token: doc.twitterOauthAccessToken,
-          access_token_secret: doc.twitterOauthAccessTokenSecret,
-        });
+          access_token_secret: doc.twitterOauthAccessTokenSecret});
         client.setAuth(client);
         client.get('statuses/user_timeline', function(err, data, response) {
-          verifyPost(doc._id, data);
+          self.verifyPost(doc._id, data);
         });
       }
     });

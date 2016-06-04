@@ -40,7 +40,7 @@ window.ProfileView = Backbone.View.extend({
     );
   },
   twitter: function() {
-    modem('GET', '/auth',
+    modem('GET', '/auth/twitter/request',
       function(json) {
         console.log(json);
         window.location = "https://api.twitter.com/oauth/authenticate?oauth_token=" + json.token;
