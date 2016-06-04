@@ -5,7 +5,7 @@ window.ProfileView = Backbone.View.extend({
     'click #btnTumblr': 'tumblr',
     'click #btnTwitter': 'twitter',
     'click #btnFacebook': 'facebook',
-    'click #btnInstagram': '',
+    'click #btnInstagram': 'instagram',
     'click #btnGithub': 'github'
   },
 
@@ -51,8 +51,21 @@ window.ProfileView = Backbone.View.extend({
       }
     );
   },
-  github: function() {
+    github: function() {
     modem('GET', '/auth/github/request',
+      function(json) {
+        console.log(json);
+
+        window.location = json.url;
+      },
+      function(xhr, ajaxOptions, thrownError) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json);
+      }
+    );
+  },
+  instagram: function() {
+    modem('GET', '/auth/instagram/request',
       function(json) {
         console.log(json);
 
