@@ -24,7 +24,7 @@ var insertUser = function(db, callback) {
   });
 };
 
-MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB  || '127.0.0.1', 27017), function(err, db) {
+MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB || '127.0.0.1', 27017), function(err, db) {
   console.log(process.env.MONGODB);
   insertUser(db, function() {
     db.close();

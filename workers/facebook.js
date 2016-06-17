@@ -1,46 +1,36 @@
 var vendors = require('../vendors'),
-  tumblr = require('tumblr.js'),
+  graph = require('fbgraph'),
   async = require('async');
 
 var Worker = function() {};
 
 Worker.prototype.start = function() {
+
   var self = this;
   setInterval(function() {
     var cursor = vendors.mongo.collection('users').find({
-      'tumblrOauthAccessToken': {
+      'facebookOauthAccessToken': {
         $exists: true
       }
     });
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        this.client = tumblr.createClient({
-          consumer_key: process.env.TUMBLR_KEY,
-          consumer_secret: process.env.TUMBLR_SECRET,
-          token: doc.tumblrOauthAccessToken,
-          token_secret: doc.tumblrOauthAccessTokenSecret
-        });
+        graph.setAccessToken(doc.facebookOauthAccessToken);
 
-        this.client.userInfo(function(err, data) {
-          data.user.blogs.forEach(function(blog) {
-            console.log(blog.name);
-            client.posts(blog.name, function(err, resp) {
-              console.log(resp.posts);
-              self.verifyPost(doc._id, resp.posts);
-            });
-          });
+        graph.get("me/POSTS?fields=comments.limit(1000),created_time,full_picture,message,likes&limit=1000", function(err, feed) {
+          if (feed != null) self.verifyPost(doc._id, feed.data);
         });
-      }
+      };
     });
-  }, 60000);
+  }, 8000);
 };
 
 Worker.prototype.verifyPost = function(userid, posts) {
   async.mapSeries(posts, function(post, callback) {
     vendors.mongo.collection('users').findOne({
       _id: userid,
-      'tumblrPosts': {
+      'facebookPosts': {
         $not: {
           $elemMatch: {
             id: post.id
@@ -49,12 +39,10 @@ Worker.prototype.verifyPost = function(userid, posts) {
       }
     }, function(err, user) {
       if (user) {
-        console.log('Adding post: ' + post.id);
-        if (!user.tumblrPosts) {
-          user.tumblrPosts = [];
+        if (!user.facebookPosts) {
+          user.facebookPosts = [];
         }
-        user.tumblrPosts.push(post);
-
+        user.facebookPosts.push(post);
         vendors.mongo.collection('users').save(user, function(err, output) {
           if (err) {
             console.log('Failed to update user.');
@@ -68,5 +56,6 @@ Worker.prototype.verifyPost = function(userid, posts) {
     });
   });
 };
+
 
 module.exports = Worker;

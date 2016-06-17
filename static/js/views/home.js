@@ -1,9 +1,10 @@
 window.HomeView = Backbone.View.extend({
     events: {
         'click #btnLogin': 'login',
-        'click #btnTumblr': 'tumblr',
         //mostrar form para registar
         'click #btnShowRegister': 'showRegisterForm',
+        'click #btnShowLogin': 'showLoginForm',
+        'click #btnGoBack': 'showInitialForm',
         //enviar registo para DB
         'click #btnRegister': 'register'
     },
@@ -11,6 +12,7 @@ window.HomeView = Backbone.View.extend({
 
     login: function() {
 
+        $('#loading-div').fadeIn('slow');
         var user = $('#txtEmail').val() || $('#regTxtEmail').val();
         var password = $('#txtPassword').val() || $('#regTxtPassword').val();
 
@@ -25,7 +27,6 @@ window.HomeView = Backbone.View.extend({
                       trigger: true
                     });
                 }, 1200);
-
                 console.log('modem. get/user: ' + json);
             },
             function(xhr, ajaxOptions, thrownError) {
@@ -36,6 +37,7 @@ window.HomeView = Backbone.View.extend({
     },
 
     register: function(e) {
+        $('#loading-div').fadeIn('slow');
         var self = this;
         e.preventDefault();
 
@@ -55,23 +57,30 @@ window.HomeView = Backbone.View.extend({
     },
 
     showRegisterForm: function() {
-        $("#registerForm").attr("style", "display:show;");
+        $("#initialForm").attr("style", "display:none; Height:0px !important");
+        $("#registerForm").fadeIn("slow");
+    },
+
+    showLoginForm: function(){
+        $("#loginForm").fadeIn("slow");
         $("#initialForm").attr("style", "display:none; Height:0px !important");
     },
 
+    showInitialForm: function(e){
+        var type = $(e.currentTarget).data('type');
+        switch(type){
+          case 'login':
+            $("#loginForm").attr("style", "display:none; Height:0px !important");
+          break;
+          case 'register':
+            $("#registerForm").attr("style", "display:none; Height:0px !important");
+          break;
+        };
 
-    tumblr: function() {
-        modem('GET', '/auth/tumblr/request',
-            function(json) {
-                console.log(json);
-                window.location = "http://www.tumblr.com/oauth/authorize?oauth_token=" + json.token;
-            },
-            function(xhr, ajaxOptions, thrownError) {
-                var json = JSON.parse(xhr.responseText);
-                console.log(json);
-            }
-        );
+        $("#initialForm").fadeIn("slow");
     },
+
+
 
 
     render: function() {
