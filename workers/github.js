@@ -25,12 +25,12 @@ Worker.prototype.start = function() {
         self.client.users.get({}, function(err, res) {
           var user = res.login
             //console.log(JSON.stringify(res));
-          console.log(user);
+          //console.log(user);
           self.client.activity.getEventsForUser({
             'user': user
           }, function(err, res) {
             self.verifyPost(doc._id, res);
-            console.log(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
           });
         });
 
