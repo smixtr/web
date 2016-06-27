@@ -38,6 +38,7 @@ window.FacebookView = Backbone.View.extend({
     $(this.el).html(this.template());
 
     var data = this.model.get('facebookposts').sort(self.sortJsonByCol('created_time'));
+    console.log(data);
     for (var i = 0; i < data.length; i++) {
 
       var countLikes = '0';

@@ -14,24 +14,25 @@ Worker.prototype.start = function() {
         $exists: true
       }
     });
+
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-		this.client = new Twit({consumer_key: process.env.TWITTER_KEY,
+        this.client = new Twit({
+          consumer_key: process.env.TWITTER_KEY,
           consumer_secret: process.env.TWITTER_SECRET,
           access_token: doc.twitterOauthAccessToken,
-          access_token_secret: doc.twitterOauthAccessTokenSecret});
+          access_token_secret: doc.twitterOauthAccessTokenSecret
+        });
         client.setAuth(client);
         client.get('statuses/user_timeline', function(err, data, response) {
           self.verifyPost(doc._id, data);
         });
       }
     });
-  }, 6000);
+  }, 8000);
 };
 
-//TWITTER_KEY=EKT9YuYCDMTd6sFoIHVgIM6Gk
-//TWITTER_SECRET=vuSSMQ7C6Vr2J9VJwH44WPsFgSO8xnzohIdNowfm68GJEg0GA4
 Worker.prototype.verifyPost = function(userid, posts) {
   async.mapSeries(posts, function(post, callback) {
     vendors.mongo.collection('users').findOne({
@@ -45,12 +46,12 @@ Worker.prototype.verifyPost = function(userid, posts) {
       }
     }, function(err, user) {
       if (user) {
-        console.log('Adding post: ' + post.id);
+
         if (!user.twitterPosts) {
           user.twitterPosts = [];
         }
         user.twitterPosts.push(post);
-
+        console.log('added tw  ' + post.id);
         vendors.mongo.collection('users').save(user, function(err, output) {
           if (err) {
             console.log('Failed to update user.');

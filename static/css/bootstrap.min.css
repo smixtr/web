@@ -7,50 +7,6 @@
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 
-.tbPostsContainer {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-    color:white
-}
-.fbPostsContainer {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center
-}
-.fbPosts {
-    max-width: 500px;
-    margin: 0 auto;
-    margin-top: 75px;
-    margin-bottom: 75px;
-}
-.fbPostsMessage {
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-size: bold;
-}
-.fbPostsImg {
-    max-width: 100%;
-    text-align: center;
-}
-img.fbImg {
-    width: 50%;
-    height: 270px;
-    display: inline-block
-}
-.fbPostsData {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0, inherit;
-    border: 1px solid black
-}
-.fbPostsInfo {
-    float: left;
-    width: 33%;
-    color: white;
-    text-align: center
-}
 html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
@@ -1285,12 +1241,12 @@ pre code {
 }
 @media (min-width:992px) {
     .container {
-        width: 970px
+        width: 700px
     }
 }
 @media (min-width:1200px) {
     .container {
-        width: 1170px
+        width: 700px
     }
 }
 .container-fluid {
@@ -1649,7 +1605,7 @@ pre code {
         width: 50%
     }
     .col-md-5 {
-        width: 41.66666667%
+        width: 81.66666667%
     }
     .col-md-4 {
         width: 33.33333333%
@@ -4231,7 +4187,7 @@ a.list-group-item .list-group-item-heading {
 a.list-group-item:hover, a.list-group-item:focus {
     color: #555;
     text-decoration: none;
-    background-color: #f5f5f5
+    background-color: green
 }
 .list-group-item.disabled, .list-group-item.disabled:hover, .list-group-item.disabled:focus {
     color: #777;

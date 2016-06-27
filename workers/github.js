@@ -23,20 +23,20 @@ Worker.prototype.start = function() {
         });
 
         self.client.users.get({}, function(err, res) {
-          var user = res.login
-            //console.log(JSON.stringify(res));
-          //console.log(user);
-          self.client.activity.getEventsForUser({
-            'user': user
-          }, function(err, res) {
-            self.verifyPost(doc._id, res);
-            //console.log(JSON.stringify(res));
-          });
+          if (res.login != null) {
+            var user = res.login
+
+            self.client.activity.getEventsForUser({
+              'user': user
+            }, function(err, res) {
+              self.verifyPost(doc._id, res);
+            });
+          }
         });
 
       }
     });
-  }, 10000);
+  }, 8000);
 };
 
 Worker.prototype.verifyPost = function(userid, posts) {
@@ -53,12 +53,11 @@ Worker.prototype.verifyPost = function(userid, posts) {
         }
       }, function(err, user) {
         if (user) {
-          console.log('Adding post: ' + post.id);
           if (!user.githubPosts) {
             user.githubPosts = [];
           }
           user.githubPosts.push(post);
-
+          console.log('added gt ' + post.id);
           vendors.mongo.collection('users').save(user, function(err, output) {
             if (err) {
               console.log('Failed to update user.');

@@ -42,6 +42,7 @@ Worker.prototype.verifyPost = function(userid, posts) {
         if (!user.facebookPosts) {
           user.facebookPosts = [];
         }
+        console.log('added fb  ' + post.id);
         user.facebookPosts.push(post);
         vendors.mongo.collection('users').save(user, function(err, output) {
           if (err) {

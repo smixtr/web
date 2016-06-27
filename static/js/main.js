@@ -27,18 +27,21 @@ var Router = Backbone.Router.extend({
     'profile': 'profile',
     ':user': 'feed',
     "facebook/:id": 'facebook',
-    "tumblr/:id" : 'tumblr',
+    "tumblr/:id": 'tumblr',
     '*notFound': 'index'
   },
 
 
   initialize: function() {
     var self = this;
+
     this.on('route', function(e) {
       var self = this;
       self.footer = $('#footer').html(new FooterView().render().el);
     });
   },
+
+
 
   profile: function() {
     var self = this;
@@ -48,12 +51,37 @@ var Router = Backbone.Router.extend({
 
   feed: function(user) {
     var self = this;
-
-    var userModel = new User(user);
-
+    var Posts = new User(user);
+    //var fba = new FacebookPosts(user)
+    /*
+    fba = new FacebookPosts(user),
+    tw = new TwitterPosts(user),
+    gh = new GithubPosts(user),
+    ig = new InstagramPosts(user),
+    tb = new TumblrPosts(user);
+    */
     templateLoader.load(['FeedView'], function() {
-      userModel.fetch(function() {
+      Posts.fetch(function() {
         var v = new FeedView({
+          model: Posts
+            //fb : fba,
+            //tw : tw,
+            //gh : gh,
+            //ig : ig
+        });
+        self.showView(v, $('#content'));
+      });
+    });
+  },
+
+  facebook: function(user) {
+    var self = this;
+    console.log('entrou aqui');
+    var userModel = new FacebookPosts(user);
+
+    templateLoader.load(['FacebookView'], function() {
+      userModel.fetch(function() {
+        var v = new FacebookView({
           model: userModel
         });
         self.showView(v, $('#content'));
@@ -61,34 +89,19 @@ var Router = Backbone.Router.extend({
     });
   },
 
-  facebook: function(user){
-    var self=this;
-    console.log('entrou aqui');
-    var userModel = new FacebookPosts(user);
-
-    templateLoader.load(['FacebookView'], function() {
-        userModel.fetch(function() {
-          var v = new FacebookView({
-            model: userModel
-          });
-          self.showView(v, $('#content'));
-        });
-      });
-  },
-
-  tumblr: function(user){
-    var self=this;
+  tumblr: function(user) {
+    var self = this;
     console.log('entrou aqui');
     var userModel = new TumblrPosts(user);
 
     templateLoader.load(['TumblrView'], function() {
-        userModel.fetch(function() {
-          var v = new TumblrView({
-            model: userModel
-          });
-          self.showView(v, $('#content'));
+      userModel.fetch(function() {
+        var v = new TumblrView({
+          model: userModel
         });
+        self.showView(v, $('#content'));
       });
+    });
   },
 
   home: function() {

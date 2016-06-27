@@ -15,18 +15,20 @@ Worker.prototype.start = function() {
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        console.log(doc.instagramOauthAccessToken);
-
         request.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + doc.instagramOauthAccessToken, function optionalCallback(err, httpResponse, body) {
-          //console.log(body);
+          if(err){
+            console.log(err);
+          }
           if (!err) {
+
             var data = JSON.parse(body);
+                  console.log(data);
             self.verifyPost(doc._id, data.data);
           }
         });
       }
     });
-  }, 10000);
+  }, 60000);
 };
 
 Worker.prototype.verifyPost = function(userid, posts) {
@@ -42,10 +44,11 @@ Worker.prototype.verifyPost = function(userid, posts) {
       }
     }, function(err, user) {
       if (user) {
-        console.log('Adding post: ' + post.id);
+          console.log('added ig   ' + post.id);
         if (!user.instagramPosts) {
           user.instagramPosts = [];
         }
+
         user.instagramPosts.push(post);
 
         vendors.mongo.collection('users').save(user, function(err, output) {
