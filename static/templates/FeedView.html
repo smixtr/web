@@ -159,6 +159,12 @@
 			$("body").css("background-color", $(this).val());
 		}).change();
 		
+		$("option").hover(function() {
+			$("#content").css("background-color", $(this).val());
+			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
+			$("body").css("background-color", $(this).val());
+		}).change();
+		
 		$('#evt_color').hover(function() {
 
 		  $(this).attr('size', $('option').length);
