@@ -871,3 +871,7 @@ footer {
 @media (max-width: 450px) {
   .intro-inner {top: 50%;}
 }
+
+#evt_color:hover{
+                transition: all .2s ease-in-out;
+            }

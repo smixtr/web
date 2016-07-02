@@ -34,6 +34,16 @@
                             </a>
                             <ul class="dropdown-menu" style="font-size:15px">
                                 <li><a href="/#feed" style="font-size:15px">Feed</a></li>
+								<li>
+									<select id="evt_color"> 
+										<option value="#3366CC">Blue</option> 
+										<option value="#E070D6">Fuchsia</option>
+										<option value="#4bb64f">Green</option> 
+										<option value="#ed9d2b">Orange</option> 
+										<option value="#FF9CB3">Pink</option> 
+										<option value="#EA4A4A">Red</option> 
+									</select>
+								</li>
                                 <li><a href="/#profile" style="font-size:15px">Profile</a></li>
                                 <li><a href="/#" style="font-size:15px">Change Password</a></li>
                                 <li role="separator" class="divider"></li>
@@ -107,4 +117,53 @@
         $(document).ready(function(){
             $('#loading-div').css('display','none');
         });*/
+		
+		function hexToRgb(hex) {
+			var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+			return result ? {
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16)
+			} : null;
+		};
+		
+		function componentToHex(c) {
+			var hex = c.toString(16);
+			return hex.length == 1 ? "0" + hex : hex;
+		};
+
+		function rgbToHex(r, g, b) {
+			return "#" + (r.toString(16)) + (g.toString(16)) + (b.toString(16));
+		};
+
+		function rgbToGrayScale(hex){
+			var rgb = hexToRgb(hex);
+			if(rgb.r > rgb.b && rgb.r > rgb.g){
+				rgb.b = rgb.r;
+				rgb.g = rgb.r;
+			}
+			if(rgb.b > rgb.r && rgb.b > rgb.g){
+				rgb.r = rgb.b;
+				rgb.g = rgb.b;
+			}
+			if(rgb.g > rgb.b && rgb.g > rgb.r){
+				rgb.b = rgb.g;
+				rgb.r = rgb.g;
+			}
+			return "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
+		};
+		
+		$("#evt_color").change(function() {
+			$("#content").css("background-color", $(this).val());
+			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
+			$("body").css("background-color", $(this).val());
+		}).change();
+		
+		$('#evt_color').hover(function() {
+
+		  $(this).attr('size', $('option').length);
+		}, function() {
+
+		  $(this).attr('size', 1);
+		});
 </script>
