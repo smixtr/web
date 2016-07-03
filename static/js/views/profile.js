@@ -6,7 +6,8 @@ window.ProfileView = Backbone.View.extend({
     'click #btnTwitter': 'twitter',
     'click #btnFacebook': 'facebook',
     'click #btnInstagram': 'instagram',
-    'click #btnGithub': 'github'
+    'click #btnGithub': 'github',
+    'click #btnLogOut': 'logout'
   },
 
   initialize: function() {
@@ -86,6 +87,13 @@ window.ProfileView = Backbone.View.extend({
   },
 
   goback: function() {
+    app.navigate('', {
+      trigger: true
+    });
+  },
+
+  logout: function() {
+    sessionStorage.clear();
     app.navigate('', {
       trigger: true
     });

@@ -17,6 +17,7 @@
     "instagram-node": "^0.5.8",
     "mongodb": "^2.1.16",
     "oauth": "^0.9.14",
+    "request": "^2.72.0",
     "socket.io": "*",
     "tumblr.js": "0.0.7",
     "twit": "^2.2.4"

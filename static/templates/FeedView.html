@@ -34,11 +34,11 @@
                             </a>
                             <ul class="dropdown-menu" style="font-size:15px">
                                 <li><a href="/#feed" style="font-size:15px">Feed</a></li>
-								<li><a id="myBtn" href="/#feed" style="font-size:15px">Change Color</a></li>
+			                    <li><a id="myBtn" href="/#feed" style="font-size:15px">Change Color</a></li>
                                 <li><a href="/#profile" style="font-size:15px">Profile</a></li>
                                 <li><a href="/#" style="font-size:15px">Change Password</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="/#logout" style="font-size:15px">Logout</a></li>
+                                <li><a id="btnLogOut" href="/#logout" style="font-size:15px">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -53,12 +53,12 @@
 		  <div class="modal-content">
 			<span>Change color</span>
 			<span class="close">×</span>
-				<option id="op" style="background-color: #3366CC" value="#3366CC">Blue</option> 
-				<option id="op" style="background-color: #E070D6" value="#E070D6">Fuchsia</option> 
-				<option id="op" style="background-color: #4bb64f" value="#4bb64f">Green</option> 
-				<option id="op" style="background-color: #ed9d2b" value="#ed9d2b">Orange</option> 
-				<option id="op" style="background-color: #FF9CB3" value="#FF9CB3">Pink</option> 
-				<option id="op" style="background-color: #EA4A4A" value="#EA4A4A">Red</option> 
+				<option id="op" style="background-color: #3366CC" value="#3366CC">Blue</option>
+				<option id="op" style="background-color: #E070D6" value="#E070D6">Fuchsia</option>
+				<option id="op" style="background-color: #4bb64f" value="#4bb64f">Green</option>
+				<option id="op" style="background-color: #ed9d2b" value="#ed9d2b">Orange</option>
+				<option id="op" style="background-color: #FF9CB3" value="#FF9CB3">Pink</option>
+				<option id="op" style="background-color: #EA4A4A" value="#EA4A4A">Red</option>
 		  </div>
 
 		</div>
@@ -133,6 +133,8 @@
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
 
+    var btnLogOut = document.getElementById("btnLogOut");
+
 		// When the user clicks the button, open the modal
 		btn.onclick = function() {
 			modal.style.display = "block";
@@ -150,8 +152,13 @@
 			}
 		}
 
+    btnLogOut.onclick = function() {
+      sessionStorage.clear();
+      app.navigate('', {
+        trigger: true
+      });
+    }
 
-		
 		function hexToRgb(hex) {
 			var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 			return result ? {
@@ -160,7 +167,7 @@
 				b: parseInt(result[3], 16)
 			} : null;
 		};
-		
+
 		function componentToHex(c) {
 			var hex = c.toString(16);
 			return hex.length == 1 ? "0" + hex : hex;
@@ -186,23 +193,23 @@
 			}
 			return "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
 		};
-		
+
 		$("#evt_color").change(function() {
 			$("#content").css("background-color", $(this).val());
 			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
 			$("body").css("background-color", $(this).val());
 		}).change();
-		
+
 		$("option").hover(function() {
 			$("#content").css("background-color", $(this).val());
 			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
 			$("body").css("background-color", $(this).val());
 		}).change();
-		
+
 		$("option").click(function() {
 			modal.style.display = "none";
 		});
-		
+
 		$('#evt_color').hover(function() {
 
 		  $(this).attr('size', $('option').length);
