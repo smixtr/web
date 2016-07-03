@@ -34,16 +34,7 @@
                             </a>
                             <ul class="dropdown-menu" style="font-size:15px">
                                 <li><a href="/#feed" style="font-size:15px">Feed</a></li>
-								<li>
-									<select id="evt_color"> 
-										<option value="#3366CC">Blue</option> 
-										<option value="#E070D6">Fuchsia</option>
-										<option value="#4bb64f">Green</option> 
-										<option value="#ed9d2b">Orange</option> 
-										<option value="#FF9CB3">Pink</option> 
-										<option value="#EA4A4A">Red</option> 
-									</select>
-								</li>
+								<li><a id="myBtn" href="/#feed" style="font-size:15px">Change Color</a></li>
                                 <li><a href="/#profile" style="font-size:15px">Profile</a></li>
                                 <li><a href="/#" style="font-size:15px">Change Password</a></li>
                                 <li role="separator" class="divider"></li>
@@ -55,6 +46,22 @@
 
             </div>
         </div>
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<span>Change color</span>
+			<span class="close">×</span>
+				<option id="op" style="background-color: #3366CC" value="#3366CC">Blue</option> 
+				<option id="op" style="background-color: #E070D6" value="#E070D6">Fuchsia</option> 
+				<option id="op" style="background-color: #4bb64f" value="#4bb64f">Green</option> 
+				<option id="op" style="background-color: #ed9d2b" value="#ed9d2b">Orange</option> 
+				<option id="op" style="background-color: #FF9CB3" value="#FF9CB3">Pink</option> 
+				<option id="op" style="background-color: #EA4A4A" value="#EA4A4A">Red</option> 
+		  </div>
+
+		</div>
 </div>
 
 </nav>
@@ -117,6 +124,33 @@
         $(document).ready(function(){
             $('#loading-div').css('display','none');
         });*/
+		// Get the modal
+		var modal = document.getElementById('myModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+
 		
 		function hexToRgb(hex) {
 			var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -164,6 +198,10 @@
 			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
 			$("body").css("background-color", $(this).val());
 		}).change();
+		
+		$("option").click(function() {
+			modal.style.display = "none";
+		});
 		
 		$('#evt_color').hover(function() {
 
