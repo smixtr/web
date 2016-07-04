@@ -31,14 +31,12 @@ Licensed under the MIT license Copyright (c) 2013 Daniel Eden Permission is here
     margin-bottom: 20px;
 }
 .fa:hover {
-    background-color: #D3D3D3 !important
 }
 .facebook {
     overflow: hidden;
     border-radius: 25px;
     -webkit-border-radius: 25px;
     -webkit-transform: translateZ(0);
-    border: 3px solid #3B5998
 }
 
 .github {
@@ -46,28 +44,24 @@ Licensed under the MIT license Copyright (c) 2013 Daniel Eden Permission is here
     border-radius: 25px;
     -webkit-border-radius: 25px;
     -webkit-transform: translateZ(0);
-    border: 3px solid black
 }
 .instagram {
     overflow: hidden;
     border-radius: 25px;
-    -webkit-border-radius: 25px;
+    -webkit-border-radius: 15px;
     -webkit-transform: translateZ(0);
-    border: 3px solid #fb3958
 }
 .tumblr {
     overflow: hidden;
     border-radius: 25px;
     -webkit-border-radius: 25px;
     -webkit-transform: translateZ(0);
-    border: 3px solid #35465c
 }
 .twitter {
     overflow: hidden;
     border-radius: 25px;
     -webkit-border-radius: 25px;
     -webkit-transform: translateZ(0);
-    border: 3px solid #55acee
 }
 .tbPostsContainer {
     max-width: 500px;
@@ -117,7 +111,7 @@ img.fbImg {
     bottom: 0;
     position: absolute;
     text-align: right;
-    color: yellow;
+    color: black;
     font-size: 25px;
     padding: 10px 30px;
 }

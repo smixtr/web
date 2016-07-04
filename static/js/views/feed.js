@@ -5,7 +5,8 @@ window.FeedView = Backbone.View.extend({
     'click #fbFilter': 'displayData',
     'click #igFilter': 'displayData',
     'click #tbFilter': 'displayData',
-    'click #twFilter': 'displayData'
+    'click #twFilter': 'displayData',
+    'click .show-description': 'toggleDescription'
   },
 
   initialize: function(user) {
@@ -17,6 +18,19 @@ window.FeedView = Backbone.View.extend({
     this.tumblr = true;
     this.instagram = true;
     this.github = true;
+  },
+
+  toggleDescription: function(event){
+    console.log(event.currentTarget);
+    var i = event.currentTarget.id;
+    var str = '#message-div-' + i;
+    if(!$(str).hasClass('toggled')){
+      $(str).fadeIn('slow');
+      $(str).addClass('toggled');
+    } else{
+      $(str).fadeOut('slow');
+      $(str).removeClass('toggled');
+    }
   },
 
   removeByFlag: function(social) {
@@ -282,7 +296,7 @@ window.FeedView = Backbone.View.extend({
     var self = this;
     $(this.el).html(this.template());
     self.buttonColor();
-
+    console.log(data);
     for (var i = 0; i < data.length; i++) {
       var image = '';
       var flagImage = '0';
@@ -295,80 +309,59 @@ window.FeedView = Backbone.View.extend({
         css = data[i].flag;
       };
 
-      /*$('#posts', this.el).append(
-        $('<div>', {
-          class: 'iso-box-wrapper col4-iso-box '
-        }).css('width', '600px').append(
-          $('<div>', {
-            class: 'iso-box photoshop branding col-md-5'
-          }).append(
-            $('<div>', {
-              class: 'portfolio-thumb ' + css + ''
-            }).append(
-              $('<div>', {
-                class: 'textFeed'
-              }).append(
-                $('<a>', {
-                  text: data[i].created_time + '   ' + data[i].message
-                })
-              ),
-              $('<div>', {
-                class: ''
-              }).css('opacity', flagImage).append(
-                $('<img>', {
-                  src: image,
-                  class: 'img-responsive',
-                  alt: 'Portfolio'
-                })
-              ),
-              $('<div>', {
-                class: 'portfolio-overlay',
-                text: 'asda'
-              }).append(
-                $('<div>', {
-                  class: 'portfolio-item'
-                }).append(
-                  $('<a>', {
-                    href: data[i].link
-                  }).append(
-                    $('<i>', {
-                      class: 'fa fa-link'
-                    })
-                  ),
-                  $('<h2>', {
-                    text: data[i].flag
-                  })
-                )
-              )
-            )
-          )
-        )
-      );*/
+      var coise = '';
+      if(css === 'instagram'){
+         coise = 'rgba(231,61,82,0.05)'
+         coise2 = '<a class=""><i class="fa fa-instagram hover-instagram" style="font-size: 50px"></i></a>';
+      } else if( css === 'facebook'){
+        coise = 'rgba(59,89,152, 0.05)';
+        coise2 = '<a class=""><i class="fa fa-facebook-official hover-facebook" style="font-size: 50px"></i></a>';
+      } else if( css === 'twitter'){
+        coise = 'rgba(29,161,242, 0.2)';
+        coise2 = '<a href="#" class="social-twitter"><i style="font-size: 50px" class="fa fa-twitter-square hover-twitter"></i></a>';
+      } else if( css === 'tumblr'){
+        coise = 'rgba(29,161,242, 0.2)';
+        coise2 = '<a href="#" class="social-twitter"><i style="font-size: 50px" class="fa fa-twitter-square hover-twitter"></i></a>';
+      }
 
-      $('#posts', this.el).append( 
-          '<div id="posts">' +
-	          '<div class="iso-box-wrapper col4-iso-box" style="width: 600px">'+
-		          '<div class="iso-box photoshop branding col-md-5">' +
-                '<div class="portfolio-thumb">'+
-                  '<div class="textFeed">' + 
-                    '<a>' + data[i].created_time + '"   "' + data[i].message + '</a>' + 
-                  '</div>' + 
-                  '<div style="opacity: flagImage">' + 
-                    '<img src="image" class="img-responsive" alt="Portfolio">' +
-                  '</div>' + 
-                  '<div class="portfolio-overlay">'+
-                    'asda'+
-                    '<div class="portfolio-item">'+
-                      '<a href="' + data[i].link + '">'+
-                        '<i class="fa fa-link"></i>'+
-                        '<h2>' + data[i].flag + '</h2>'+
-                      '</a>'+
+      var toggler = '';
+      if(data[i].message !== ' '){
+        toggler = '<div style="position:absolute: bottom: 0px; right: 0px;" class="textFeed">' +
+          '<i id="' + i + '" class="fa fa-align-justify show-description" aria-hidden="true"></i>' +
+        '</div>';
+      }
+
+      $('#posts', this.el).append(
+            '<div style="position: relative; margin: 30px; padding-left: 11%; min-height: 550px; padding-top: 40px; background-color:' + coise +'; border-radius: 20px;">' +
+              '<div style="text-align: left; position: absolute; top: 6.7%; left: 5%">' +
+                coise2 +
+              '</div>' +
+              '<div style="position:absolute: bottom: 0px; left: 0px;" class="textFeed">' +
+                '<a>' + data[i].created_time + '</a>' +
+              '</div>' +
+              toggler +
+  	          '<div class="iso-box-wrapper col4-iso-box" style="width: 600px">'+
+  		          '<div class="iso-box photoshop branding col-md-5">' +
+                  '<div class="portfolio-thumb ' + css + '">'+
+                    '<div style="opacity: '+flagImage+'">' +
+                      '<img src="'+image+'" class="img-responsive" alt="Portfolio">' +
+                    '</div>' +
+                    '<div class="portfolio-overlay">'+
+                      'asda'+
+                      '<div class="portfolio-item">'+
+                        '<a href="' + data[i].link + '">'+
+                          '<i class="fa fa-link"></i>'+
+                          '<h2>' + data[i].flag + '</h2>'+
+                        '</a>'+
+                      '</div>'+
                     '</div>'+
-                  '</div>'+
-                '</div>' +
-              '</div>'+
-            '</div>'+
-          '</div>');
+                  '</div>' +
+                '</div>'+
+              '</div>' +
+              '<div id="message-div-' + i + '" style="display: none">' +
+                '<p>' + data[i].message + '</p>' +
+              '</div>' +
+            '</div>');
     }
   },
 

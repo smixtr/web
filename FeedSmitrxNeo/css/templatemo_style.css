@@ -1,4 +1,4 @@
-/* 
+/*
 
 App Landing Template
 
@@ -89,7 +89,7 @@ form button.form-control:focus {
     background-color: #1c2d35;
 }
 form textarea.form-control { min-height: 120px;}
-form .input-group-addon { 
+form .input-group-addon {
     border: 0px;
     background-color: transparent;
     border-bottom: 3px solid #233842;
@@ -117,7 +117,7 @@ header.template_header h1 {
     color: #fff;
 }
 header.template_header h1 span {
-    position: relative; 
+    position: relative;
     top: -15px;
 }
 /***** Main Menu *****/
@@ -132,7 +132,7 @@ nav.main-menu {
     border-radius: 5px;
     border: 1px solid rgba(37,58,68,.15);
 }
-nav.main-menu a:link, nav.main-menu a:hover, nav.main-menu a:focus, nav.main-menu a { 
+nav.main-menu a:link, nav.main-menu a:hover, nav.main-menu a:focus, nav.main-menu a {
     color: #455a64;
     text-align: left;
     font: normal normal 400 18px/30px 'Fira Sans', sans-serif;
@@ -259,7 +259,7 @@ nav.main-menu a:link, nav.main-menu a:hover, nav.main-menu a:focus, nav.main-men
     color:#233842;
 }
 /***** Download *****/
-#templatemo_download { 
+#templatemo_download {
     background: url(../images/download_background.jpg) fixed;
 }
 #templatemo_download h2 {
@@ -337,7 +337,7 @@ nav.main-menu a:link, nav.main-menu a:hover, nav.main-menu a:focus, nav.main-men
 }
 #templatemo_contact .social li {
     margin-left: 0;
-    width: 25%;
+    width: 20%;
 }
 #templatemo_contact .social a {
     margin: 50px auto 4px auto;
@@ -360,6 +360,7 @@ nav.main-menu a:link, nav.main-menu a:hover, nav.main-menu a:focus, nav.main-men
 #templatemo_contact .social .social-twitter { background: #28a9e0;}
 #templatemo_contact .social .social-youtube { background: #f86d70;}
 #templatemo_contact .social .social-instagram { background: #cab9a9;}
+#templatemo_contact .social .social-tumblr { background: #35465c;}
 /***** Footer *****/
 footer {
     padding: 20px 0 16px 0;
@@ -372,7 +373,7 @@ footer {
     line-height: 32px;
     color: #666;
 }
-.footer-copyright a { 
+.footer-copyright a {
     border-bottom: 1px dotted #fff;
     color: #666;
 }
