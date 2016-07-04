@@ -185,8 +185,11 @@ window.FeedView = Backbone.View.extend({
         doc.created_time = date;
         doc.link = instagram.link;
 
-        if (instagram.caption.text != null) {
-          doc.message = instagram.caption.text;
+        doc.message = " ";
+        if (instagram.caption != null) {
+          if (instagram.caption.text != null) {
+            doc.message = instagram.caption.text;
+          }
         }
         doc.image = 'null';
         if (instagram.images.standard_resolution.url != null) {
@@ -287,7 +290,7 @@ window.FeedView = Backbone.View.extend({
         image = data[i].image;
         flagImage = '1';
       };
-      var css ='';
+      var css = '';
       if (data[i].flag != null) {
         css = data[i].flag;
       };
@@ -300,7 +303,7 @@ window.FeedView = Backbone.View.extend({
             class: 'iso-box photoshop branding col-md-5'
           }).append(
             $('<div>', {
-              class: 'portfolio-thumb '+ css +''
+              class: 'portfolio-thumb ' + css + ''
             }).append(
               $('<div>', {
                 class: 'textFeed'

@@ -6,7 +6,8 @@ window.HomeView = Backbone.View.extend({
     'click #btnShowLogin': 'showLoginForm',
     'click #btnGoBack': 'showInitialForm',
     //enviar registo para DB
-    'click #btnRegister': 'register'
+    'click #btnRegister': 'register',
+    'keyup #txtEmail': 'EventHandler'
   },
 
 
@@ -80,8 +81,15 @@ window.HomeView = Backbone.View.extend({
     $("#initialForm").fadeIn("slow");
   },
 
-
-
+  EventHandler: function(event){
+    console.log('eheheheh', event);
+     if(event.keyCode == 13){
+        var str = event.currentTarget.id;
+        if(str === 'txtEmail' || str === 'txtPasword'){
+          this.$('#btnLogin').click();
+        }
+    }
+  },
 
   render: function() {
 
