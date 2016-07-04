@@ -47,6 +47,7 @@ window.HomeView = Backbone.View.extend({
       function(json) {
 
         console.log('registou' + json);
+        $('#loading-div').fadeOut('slow');
       },
       function(xhr, ajaxOptions, thrownError) {
         console.log(xhr.responseText);
