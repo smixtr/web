@@ -322,18 +322,18 @@ window.FeedView = Backbone.View.extend({
         coise2 = '<a href="#" class="social-twitter"><i style="font-size: 50px" class="fa fa-twitter-square hover-twitter"></i></a>';
       } else if( css === 'tumblr'){
         coise = 'rgba(29,161,242, 0.2)';
-        coise2 = '<a href="#" class="social-twitter"><i style="font-size: 50px" class="fa fa-twitter-square hover-twitter"></i></a>';
+        coise2 = '<a href="#" class="social-tumblr"><i style="font-size: 50px" class="fa fa-tumblr-square hover-tumblr"></i></a>';
       }
 
       var toggler = '';
       if(data[i].message !== ' '){
         toggler = '<div style="position:absolute: bottom: 0px; right: 0px;" class="textFeed">' +
-          '<i id="' + i + '" class="fa fa-align-justify show-description" aria-hidden="true"></i>' +
+          '<a id="'+ i +'" class="show-description"><i class="fa fa-align-justify" aria-hidden="true"></i></a>' +
         '</div>';
       }
 
       $('#posts', this.el).append(
-            '<div style="position: relative; margin: 30px; padding-left: 11%; min-height: 550px; padding-top: 40px; background-color:' + coise +'; border-radius: 20px;">' +
+            '<div style="position: relative; margin: 30px; padding-left: 11%; padding-top: 40px; background-color:' + coise +'; border-radius: 20px; float:left; min-width: 640px;">' +
               '<div style="text-align: left; position: absolute; top: 6.7%; left: 5%">' +
                 coise2 +
               '</div>' +
@@ -341,11 +341,11 @@ window.FeedView = Backbone.View.extend({
                 '<a>' + data[i].created_time + '</a>' +
               '</div>' +
               toggler +
-  	          '<div class="iso-box-wrapper col4-iso-box" style="width: 600px">'+
-  		          '<div class="iso-box photoshop branding col-md-5">' +
-                  '<div class="portfolio-thumb ' + css + '">'+
-                    '<div style="opacity: '+flagImage+'">' +
-                      '<img src="'+image+'" class="img-responsive" alt="Portfolio">' +
+  	          '<div class="iso-box-wrapper col4-iso-box" style="float:left; margin-bottom: 20px; max-width: 460px;">'+
+  		          '<div class="iso-box photoshop branding col-md-5" style="float:left; width: 100%;">' +
+                  '<div class="portfolio-thumb ' + css + '" style="float:left;">'+
+                    '<div style="opacity: '+flagImage+'" style="float:left;">' +
+                      '<img src="'+image+'" class="img-responsive" alt="Portfolio" width="430">' +
                     '</div>' +
                     '<div class="portfolio-overlay">'+
                       'asda'+
@@ -359,7 +359,7 @@ window.FeedView = Backbone.View.extend({
                   '</div>' +
                 '</div>'+
               '</div>' +
-              '<div id="message-div-' + i + '" style="display: none">' +
+              '<div id="message-div-' + i + '" style="display: none; margin-bottom: 50px; text-align: justify; padding-right: 17%;">' +
                 '<p>' + data[i].message + '</p>' +
               '</div>' +
             '</div>');
