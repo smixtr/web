@@ -350,7 +350,7 @@ window.FeedView = Backbone.View.extend({
 	          '<div class="iso-box-wrapper col4-iso-box" style="width: 600px">'+
 		          '<div class="iso-box photoshop branding col-md-5">' +
                 '<div class="textFeed">' + 
-				          '<a>data[i].created_time + "   " + data[i].message</a>' + 
+				          '<a>' + data[i].created_time + '"   "' + data[i].message + '</a>' + 
 			          '</div>' + 
 			          '<div style="opacity: flagImage">' + 
 				          '<img src="image" class="img-responsive" alt="Portfolio">'
@@ -358,9 +358,9 @@ window.FeedView = Backbone.View.extend({
                 '<div class="portfolio-overlay">'+
                   'asda'+
                   '<div class="portfolio-item">'+
-                    '<a href="data[i].link">'+
+                    '<a href="' + data[i].link + '">'+
                       '<i class="fa fa-link"></i>'+
-                      '<h2>data[i].flag</h2>'+
+                      '<h2>' + data[i].flag + '</h2>'+
                     '</a>'+
                   '</div>'+
                 '</div>'+
