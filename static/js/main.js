@@ -106,10 +106,16 @@ var Router = Backbone.Router.extend({
 
   home: function() {
     var self = this;
+
     var homeView = new HomeView({
       model: window.profile
     });
-    self.showView(homeView, $('#content'));
+    if (!getKeyo()) {
+      self.showView(homeView, $('#content'));
+    } else {
+      var profileView = new ProfileView();
+      self.showView(profileView, $('#content'));
+    }
   },
 
   verifyLogin: function(loggedFunction) {
