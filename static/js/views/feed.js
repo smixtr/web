@@ -334,7 +334,7 @@ window.FeedView = Backbone.View.extend({
 
       $('#posts', this.el).append(
             '<div style="position: relative; margin: 30px; padding-left: 11%; padding-top: 40px; background-color:' + coise +'; border-radius: 20px; float:left; min-width: 640px;">' +
-              '<div style="text-align: left; position: absolute; top: 6.7%; left: 5%">' +
+              '<div style="text-align: left; position: absolute; top: 36.5px; left: 5%">' +
                 coise2 +
               '</div>' +
               '<div style="position:absolute: bottom: 0px; left: 0px;" class="textFeed">' +
