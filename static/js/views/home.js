@@ -7,7 +7,7 @@ window.HomeView = Backbone.View.extend({
     'click #btnGoBack': 'showInitialForm',
     //enviar registo para DB
     'click #btnRegister': 'register',
-    'keyup #txtEmail': 'EventHandler'
+    'keyup #txtEmail': 'EventHandler',
   },
 
 
