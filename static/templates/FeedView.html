@@ -1,46 +1,220 @@
-<section id="templatemo_home">
+<!-- FEED STUFF-->
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/style.css">
+<!-- END FEED STUFF-->
+
+<div class="nav-container">
+    <nav class="nav-inner transparent">
+
+        <div class="navbar">
+            <div class="container" style="position:fixed; top:0; height:50px; z-index:2000; background-color:white; width:100%">
+                <div class="row">
+
+                    <div class="brand" style="padding: 0 !important;">
+                        <a href="/#" style="color:#909090; margin-left: 40px;">Smixtr</a>
+                    </div>
+
+                    <div class="navicon">
+                        <div class="menu-container">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="collapse navbar-collapse navM" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown " style="right: 30px; top: 10px; ">
+
+                            <a href="#" style="width:100px; height:100px;border-radius:50px; padding:0 !important;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img style="width:100px; height:100px;border-radius:50px; border:3px solid gray" src="/images/about-img.jpg" />
+                            </a>
+                            <ul class="dropdown-menu" style="font-size:15px">
+                                <li><a href="/#feed" style="font-size:15px">Feed</a></li>
+			                    <li><a id="myBtn" href="/#feed" style="font-size:15px">Change Color</a></li>
+                                <li><a href="/#profile" style="font-size:15px">Profile</a></li>
+                                <li><a href="/#" style="font-size:15px">Change Password</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a id="btnLogOut" href="/#logout" style="font-size:15px">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<span>Change color</span>
+			<span class="close">×</span>
+				<option id="op" style="background-color: #3366CC" value="#3366CC">Blue</option>
+				<option id="op" style="background-color: #E070D6" value="#E070D6">Fuchsia</option>
+				<option id="op" style="background-color: #4bb64f" value="#4bb64f">Green</option>
+				<option id="op" style="background-color: #ed9d2b" value="#ed9d2b">Orange</option>
+				<option id="op" style="background-color: #FF9CB3" value="#FF9CB3">Pink</option>
+				<option id="op" style="background-color: #EA4A4A" value="#EA4A4A">Red</option>
+		  </div>
+
+		</div>
+</div>
+
+</nav>
+</div>
+
+
+<!-- Portfolio section
+
+================================================== -->
+<section id="portfolio">
     <div class="container">
-        <div class="templatemo_home_inner_wapper">
-            <!-- <div style="background-image:" -->
+        <div class="row">
+            <div style="position:fixed; left:0; width:35px;" id="grande">
+                <ul class="social-icon wow fadeInUp verticalM" data-wow-delay="0.6s">
+                    <li>
+                        <a id="fbFilter" data-type="facebook" class="fa fa-facebook" style="font-size:24px; border:1px solid"></a>
+                    </li>
+                </ul>
+                <ul class="social-icon wow fadeInUp verticalM" data-wow-delay="0.6s">
+                    <li>
+                        <a id="twFilter" data-type="twitter" class="fa fa-twitter" style="font-size:24px; border:1px solid"></a>
+                    </li>
+                </ul>
+                <ul class="social-icon wow fadeInUp verticalM" data-wow-delay="0.6s">
+                    <li>
+                        <a id="igFilter" data-type="instagram" class="fa fa-instagram" style="font-size:24px; border:1px solid"></a>
+                    </li>
+                </ul>
+                <ul class="social-icon wow fadeInUp verticalM" data-wow-delay="0.6s">
+                    <li>
+                        <a id="tbFilter" data-type="tumblr" class="fa fa-tumblr" style="font-size:24px; border:1px solid"></a>
+                    </li>
+                </ul>
+                <ul class="social-icon wow fadeInUp verticalM" data-wow-delay="0.6s">
+                    <li>
+                        <a id="gtFilter" data-type="github" class="fa fa-github" style="font-size:24px; border:1px solid"></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="templatemo_home_inner_wapper">
-          <!-- <div style="background-image:" -->
-          <h1 class="text-center">  <!--<i class="fa fa-mobile-phone">--></i> Profile </h1>
+        <div class="row">
+
+
+            <!-- iso section -->
+
+            <!-- iso box section -->
+
+            <div class="iso-box-section wow fadeInUp" data-wow-delay="2">
+                <div id="posts">
+                </div>
+            </div>
         </div>
-        <div class="templatemo_home_inner_wapper">
-            <table id="tableProfile">
-                <tr>
-                    <td>ID</td>
-                    <td>
-                        <span id="txtID"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Username</td>
-                    <td>
-                        <span id="txtUsername"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td>
-                        <span id="txtPassword"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Type</td>
-                    <td>
-                        <span id="txtType"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>
-                        <span id="txtStatus"></span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+
+
+
     </div>
 </section>
+<script>
+    /*
+        $(document).ready(function(){
+            $('#loading-div').css('display','none');
+        });*/
+		// Get the modal
+		var modal = document.getElementById('myModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+    var btnLogOut = document.getElementById("btnLogOut");
+
+		// When the user clicks the button, open the modal
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+    btnLogOut.onclick = function() {
+      sessionStorage.clear();
+      app.navigate('', {
+        trigger: true
+      });
+    }
+
+		function hexToRgb(hex) {
+			var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+			return result ? {
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16)
+			} : null;
+		};
+
+		function componentToHex(c) {
+			var hex = c.toString(16);
+			return hex.length == 1 ? "0" + hex : hex;
+		};
+
+		function rgbToHex(r, g, b) {
+			return "#" + (r.toString(16)) + (g.toString(16)) + (b.toString(16));
+		};
+
+		function rgbToGrayScale(hex){
+			var rgb = hexToRgb(hex);
+			if(rgb.r > rgb.b && rgb.r > rgb.g){
+				rgb.b = rgb.r;
+				rgb.g = rgb.r;
+			}
+			if(rgb.b > rgb.r && rgb.b > rgb.g){
+				rgb.r = rgb.b;
+				rgb.g = rgb.b;
+			}
+			if(rgb.g > rgb.b && rgb.g > rgb.r){
+				rgb.b = rgb.g;
+				rgb.r = rgb.g;
+			}
+			return "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
+		};
+
+		$("#evt_color").change(function() {
+			$("#content").css("background-color", $(this).val());
+			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
+			$("body").css("background-color", $(this).val());
+		}).change();
+
+		$("option").hover(function() {
+			$("#content").css("background-color", $(this).val());
+			$("#footer").css("background-color", rgbToGrayScale($(this).val()));
+			$("body").css("background-color", $(this).val());
+		}).change();
+
+		$("option").click(function() {
+			modal.style.display = "none";
+		});
+
+		$('#evt_color').hover(function() {
+
+		  $(this).attr('size', $('option').length);
+		}, function() {
+
+		  $(this).attr('size', 1);
+		});
+</script>

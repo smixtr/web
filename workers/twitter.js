@@ -1,7 +1,10 @@
 var vendors = require('../vendors'),
-  twitter = require('twitter');
+  Twit = require('twit'),
+  async = require('async');
 
-var Worker = function() {};
+var Worker = function() {
+
+};
 
 Worker.prototype.start = function() {
   var self = this;
@@ -11,57 +14,55 @@ Worker.prototype.start = function() {
         $exists: true
       }
     });
+
     var found = [];
     cursor.each(function(err, doc) {
       if (doc) {
-        this.client = twitter.createClient({
+        this.client = new Twit({
           consumer_key: process.env.TWITTER_KEY,
           consumer_secret: process.env.TWITTER_SECRET,
-          token: doc.twitterOauthAccessToken,
-          token_secret: doc.twitterOauthAccessTokenSecret
+          access_token: doc.twitterOauthAccessToken,
+          access_token_secret: doc.twitterOauthAccessTokenSecret
         });
-
-        this.client.userInfo(function(err, data) {
-          data.user.blogs.forEach(function(blog) {
-            console.log(blog.name);
-            client.posts(blog.name, function(err, resp) {
-              console.log(resp.posts);
-              for (var i = 0; i < resp.posts.length; i++) {
-                self.verifyPost(doc._id, resp.posts[i]);
-              }
-            });
-          });
+        client.setAuth(client);
+        client.get('statuses/user_timeline', function(err, data, response) {
+          self.verifyPost(doc._id, data);
         });
       }
     });
-  }, 60000);
+  }, 8000);
 };
 
-Worker.prototype.verifyPost = function(userid, post) {
-  vendors.mongo.collection('users').findOne({
-    _id: userid,
-    'twitterPosts': {
-      $not: {
-        $elemMatch: {
-          id: post.id
+Worker.prototype.verifyPost = function(userid, posts) {
+  async.mapSeries(posts, function(post, callback) {
+    vendors.mongo.collection('users').findOne({
+      _id: userid,
+      'twitterPosts': {
+        $not: {
+          $elemMatch: {
+            id: post.id
+          }
         }
       }
-    }
-  }, function(err, user) {
-    if (user) {
-      console.log('Adding post: ' + post.id);
-      if (!user.twitterPosts) {
-        user.twitterPosts = [];
-      }
-      user.twitterPosts.push(post);
+    }, function(err, user) {
+      if (user) {
 
-      vendors.mongo.collection('users').save(user, function(err, output) {
-        if (err) {
-          console.log('Failed to update user.');
-          console.log(err);
+        if (!user.twitterPosts) {
+          user.twitterPosts = [];
         }
-      });
-    }
+        user.twitterPosts.push(post);
+        console.log('added tw  ' + post.id);
+        vendors.mongo.collection('users').save(user, function(err, output) {
+          if (err) {
+            console.log('Failed to update user.');
+            console.log(err);
+          }
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
   });
 };
 

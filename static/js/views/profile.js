@@ -5,8 +5,9 @@ window.ProfileView = Backbone.View.extend({
     'click #btnTumblr': 'tumblr',
     'click #btnTwitter': 'twitter',
     'click #btnFacebook': 'facebook',
-    'click #btnInstagram': '',
-    'click #btnGithub': ''
+    'click #btnInstagram': 'instagram',
+    'click #btnGithub': 'github',
+    'click #btnLogOut': 'logout'
   },
 
   initialize: function() {
@@ -51,6 +52,32 @@ window.ProfileView = Backbone.View.extend({
       }
     );
   },
+    github: function() {
+    modem('GET', '/auth/github/request',
+      function(json) {
+        console.log(json);
+
+        window.location = json.url;
+      },
+      function(xhr, ajaxOptions, thrownError) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json);
+      }
+    );
+  },
+  instagram: function() {
+    modem('GET', '/auth/instagram/request',
+      function(json) {
+        console.log(json);
+
+        window.location = json.url;
+      },
+      function(xhr, ajaxOptions, thrownError) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json);
+      }
+    );
+  },
   auth: function(e) {
     if (!window.sessionStorage.getItem("keyo")) {
       app.navigate("/#", true);
@@ -60,6 +87,13 @@ window.ProfileView = Backbone.View.extend({
   },
 
   goback: function() {
+    app.navigate('', {
+      trigger: true
+    });
+  },
+
+  logout: function() {
+    sessionStorage.clear();
     app.navigate('', {
       trigger: true
     });

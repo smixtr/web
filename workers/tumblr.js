@@ -1,5 +1,6 @@
 var vendors = require('../vendors'),
-  tumblr = require('tumblr.js');
+  tumblr = require('tumblr.js'),
+  async = require('async');
 
 var Worker = function() {};
 
@@ -22,46 +23,51 @@ Worker.prototype.start = function() {
         });
 
         this.client.userInfo(function(err, data) {
-          data.user.blogs.forEach(function(blog) {
-            console.log(blog.name);
-            client.posts(blog.name, function(err, resp) {
-              console.log(resp.posts);
-              for (var i = 0; i < resp.posts.length; i++) {
-                self.verifyPost(doc._id, resp.posts[i]);
-              }
+          if (!err) {
+            data.user.blogs.forEach(function(blog) {
+
+              this.client.posts(blog.name, function(err, resp) {
+
+                self.verifyPost(doc._id, resp.posts);
+              });
             });
-          });
+          }
         });
       }
     });
-  }, 60000);
+  }, 8000);
 };
 
-Worker.prototype.verifyPost = function(userid, post) {
-  vendors.mongo.collection('users').findOne({
-    _id: userid,
-    'tumblrPosts': {
-      $not: {
-        $elemMatch: {
-          id: post.id
+Worker.prototype.verifyPost = function(userid, posts) {
+  async.mapSeries(posts, function(post, callback) {
+    vendors.mongo.collection('users').findOne({
+      _id: userid,
+      'tumblrPosts': {
+        $not: {
+          $elemMatch: {
+            id: post.id
+          }
         }
       }
-    }
-  }, function(err, user) {
-    if (user) {
-      console.log('Adding post: ' + post.id);
-      if (!user.tumblrPosts) {
-        user.tumblrPosts = [];
-      }
-      user.tumblrPosts.push(post);
+    }, function(err, user) {
+      if (user) {
 
-      vendors.mongo.collection('users').save(user, function(err, output) {
-        if (err) {
-          console.log('Failed to update user.');
-          console.log(err);
+        if (!user.tumblrPosts) {
+          user.tumblrPosts = [];
         }
-      });
-    }
+        user.tumblrPosts.push(post);
+        console.log('added tb  ' + post.id);
+        vendors.mongo.collection('users').save(user, function(err, output) {
+          if (err) {
+            console.log('Failed to update user.');
+
+          }
+          callback();
+        });
+      } else {
+        callback();
+      }
+    });
   });
 };
 

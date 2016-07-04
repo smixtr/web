@@ -10,20 +10,3 @@ MongoClient.connect(util.format('mongodb://%s:%s/smixtr', process.env.MONGODB ||
   console.log('Connected to mongodb.');
   exports.mongo = db;
 });
-
-
-/*
-exports.twitter = {
-  consumer_key: process.env.TWITTER_KEY,
-  consumer_secret: process.env.TWITTER_SECRET,
-};
-
-exports.instagram = ig.use({
-  client_id: process.env.INSTAGRAM_ID,
-  client_secret: process.env.INSTAGRAM_SECRET
-});
-
-exports.github = new GitHubApi({
-  version: "3.0.0"
-});
-*/

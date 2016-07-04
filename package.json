@@ -13,13 +13,14 @@
     "body-parser": "^1.15.0",
     "express": "^4.13.3",
     "fbgraph": "^1.1.0",
-    "github": "^0.2.4",
+    "github": "*",
     "instagram-node": "^0.5.8",
     "mongodb": "^2.1.16",
     "oauth": "^0.9.14",
+    "request": "^2.72.0",
     "socket.io": "*",
     "tumblr.js": "0.0.7",
-    "twitter": "^1.2.5"
+    "twit": "^2.2.4"
   },
   "description": ""
 }
