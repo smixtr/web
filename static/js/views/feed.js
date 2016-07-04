@@ -323,6 +323,9 @@ window.FeedView = Backbone.View.extend({
       } else if( css === 'tumblr'){
         coise = 'rgba(29,161,242, 0.2)';
         coise2 = '<a href="#" class="social-tumblr"><i style="font-size: 50px" class="fa fa-tumblr-square hover-tumblr"></i></a>';
+      } else if( css === 'github'){
+        coise = 'rgba(10,10,10, 0.2)';
+        coise2 = '<a href="#" class="social-github"><i style="font-size: 50px" class="fa fa-github-square hover-github"></i></a>';
       }
 
       var toggler = '';
