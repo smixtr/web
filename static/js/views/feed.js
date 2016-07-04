@@ -310,6 +310,7 @@ window.FeedView = Backbone.View.extend({
       };
 
       var coise = '';
+      ar coise2 = '';
       if(css === 'instagram'){
          coise = 'rgba(231,61,82,0.05)'
          coise2 = '<a class=""><i class="fa fa-instagram hover-instagram" style="font-size: 50px"></i></a>';
