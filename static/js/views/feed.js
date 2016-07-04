@@ -345,7 +345,7 @@ window.FeedView = Backbone.View.extend({
         )
       );*/
 
-      $('#posts', this.el).innerHTML = 
+      $('#posts', this.el).append( 
           '<div id="posts">' +
 	          '<div class="iso-box-wrapper col4-iso-box" style="width: 600px">'+
 		          '<div class="iso-box photoshop branding col-md-5">' +
@@ -353,7 +353,7 @@ window.FeedView = Backbone.View.extend({
 				          '<a>' + data[i].created_time + '"   "' + data[i].message + '</a>' + 
 			          '</div>' + 
 			          '<div style="opacity: flagImage">' + 
-				          '<img src="image" class="img-responsive" alt="Portfolio">'
+				          '<img src="image" class="img-responsive" alt="Portfolio">' +
 			          '</div>' + 
                 '<div class="portfolio-overlay">'+
                   'asda'+
@@ -366,7 +366,7 @@ window.FeedView = Backbone.View.extend({
                 '</div>'+
               '</div>'+
             '</div>'+
-          '</div>'
+          '</div>');
     }
   },
 
